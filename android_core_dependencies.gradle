@@ -1,0 +1,16 @@
+dependencies {
+    // KOTLIN
+    implementation Kotlin.kotlin_std
+    implementation Kotlin.kotlinCoroutineCore
+    implementation Kotlin.kotlinCoroutineAndroid
+
+    // ANDROID
+    implementation SupportLibs.appCompat
+    implementation SupportLibs.coreKtx
+    implementation SupportLibs.constraintLayout
+    implementation SupportLibs.lifecycleViewModel
+    implementation SupportLibs.lifecycleExtensions
+    implementation SupportLibs.recyclerView
+    implementation SupportLibs.navigation
+    implementation SupportLibs.navigationFrag
+}

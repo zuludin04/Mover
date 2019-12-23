@@ -1,0 +1,1 @@
+include ':app', ':popular', ':nowplaying', ':upcoming', ':data', ':detail', ':common', ':search'

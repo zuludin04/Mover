@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mover_navigation"
+    app:startDestination="@id/menu_popular">
+
+    <fragment
+        android:id="@+id/menu_popular"
+        android:name="com.app.zuludin.popular.PopularFragment"
+        android:label="Popular" />
+
+    <fragment
+        android:id="@+id/menu_now_playing"
+        android:name="com.app.zuludin.nowplaying.NowPlayingFragment"
+        android:label="Now Playing" />
+
+    <fragment
+        android:id="@+id/menu_upcoming"
+        android:name="com.app.zuludin.upcoming.UpcomingFragment"
+        android:label="Upcoming" />
+
+</navigation>
