@@ -31,7 +31,6 @@ class PopularViewModel(
     fun refreshLayout() = loadPopularMovie()
 
     private fun loadPopularMovie() = viewModelScope.launch(dispatchers.main) {
-        showLoading(true)
         _popularMovies.removeSource(movieSource)
         withContext(dispatchers.io) {
             movieSource = getPopularMovieUseCase()
@@ -39,10 +38,8 @@ class PopularViewModel(
         _popularMovies.addSource(movieSource) {
             _popularMovies.value = it
             errorLayout.value = it.status == Resource.Status.ERROR
-            showLoading(false)
             if (it.status == Resource.Status.ERROR) {
                 _snackBarError.value = Event("There something wrong")
-                showLoading(false)
             }
         }
     }

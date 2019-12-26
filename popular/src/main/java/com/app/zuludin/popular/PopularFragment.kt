@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.zuludin.common.base.BaseFragment
+import com.app.zuludin.common.base.BaseViewModel
 import com.app.zuludin.popular.adapter.PopularAdapter
 import com.app.zuludin.popular.databinding.FragmentPopularBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * A simple [Fragment] subclass.
  */
-class PopularFragment : Fragment() {
+class PopularFragment : BaseFragment() {
 
     private lateinit var dataBinding: FragmentPopularBinding
     private val viewModel: PopularViewModel by viewModel()
@@ -38,6 +40,8 @@ class PopularFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showMovieInRecycler()
     }
+
+    override fun getViewModel(): BaseViewModel = viewModel
 
     private fun showMovieInRecycler() {
         val movieAdapter =

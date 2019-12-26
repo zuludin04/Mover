@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.app.zuludin.common.base.BaseFragment
+import com.app.zuludin.common.base.BaseViewModel
 import com.app.zuludin.nowplaying.adapter.NowPlayingAdapter
 import com.app.zuludin.nowplaying.databinding.FragmentNowPlayingBinding
 import kotlinx.android.synthetic.main.fragment_now_playing.*
@@ -16,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * A simple [Fragment] subclass.
  */
-class NowPlayingFragment : Fragment() {
+class NowPlayingFragment : BaseFragment() {
 
     private lateinit var dataBinding: FragmentNowPlayingBinding
     private val viewModel: NowPlayingViewModel by viewModel()
@@ -39,6 +41,8 @@ class NowPlayingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showMovieInRecycler()
     }
+
+    override fun getViewModel(): BaseViewModel = viewModel
 
     private fun showMovieInRecycler() {
         val movieAdapter = NowPlayingAdapter(ArrayList())

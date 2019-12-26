@@ -7,13 +7,6 @@ import com.app.zuludin.common.Event
 import com.app.zuludin.data.MoverRepository
 
 open class BaseViewModel : ViewModel() {
-    private val loadingProgress = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = loadingProgress
-
     protected val _snackBarError = MutableLiveData<Event<String>>()
-    val snakBarError: LiveData<Event<String>> get() = _snackBarError
-
-    fun showLoading(show: Boolean) {
-        loadingProgress.value = show
-    }
+    val snackBarError: LiveData<Event<String>> get() = _snackBarError
 }
