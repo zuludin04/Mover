@@ -40,7 +40,13 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipChildren="false" />
+            android:clipChildren="false"
+            android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}" />
+
+        <include
+            android:id="@+id/error_layout"
+            layout="@layout/upcoming_error_layout"
+            android:visibility="@{viewModel.error ? View.VISIBLE : View.GONE}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

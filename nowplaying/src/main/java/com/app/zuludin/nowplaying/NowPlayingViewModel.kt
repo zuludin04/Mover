@@ -21,9 +21,14 @@ class NowPlayingViewModel(
     val movies: LiveData<Resource<List<MovieResult>>> get() = nowPlayingMovies
     private var movieSource: LiveData<Resource<List<MovieResult>>> = MutableLiveData()
 
+    private val errorResult = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean> get() = errorResult
+
     init {
         loadingNowPlayingMovie()
     }
+
+    fun refreshLayout() = loadingNowPlayingMovie()
 
     private fun loadingNowPlayingMovie() = viewModelScope.launch(dispatchers.main) {
         nowPlayingMovies.removeSource(movieSource)
@@ -33,6 +38,7 @@ class NowPlayingViewModel(
 
         nowPlayingMovies.addSource(movieSource) {
             nowPlayingMovies.value = it
+            errorResult.value = it.status == Resource.Status.ERROR
             if (it.status == Resource.Status.ERROR) _snackBarError.value =
                 Event("There is something wrong")
         }

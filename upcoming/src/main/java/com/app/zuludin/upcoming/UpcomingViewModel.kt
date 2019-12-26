@@ -21,9 +21,14 @@ class UpcomingViewModel(
     val movies: LiveData<Resource<List<MovieResult>>> get() = upcomingMovies
     private var movieSource: LiveData<Resource<List<MovieResult>>> = MutableLiveData()
 
+    private val errorLayout = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean> get() = errorLayout
+
     init {
         loadUpcomingMovie()
     }
+
+    fun refreshLayout() = loadUpcomingMovie()
 
     private fun loadUpcomingMovie() = viewModelScope.launch(dispatchers.main) {
         upcomingMovies.removeSource(movieSource)
@@ -33,6 +38,7 @@ class UpcomingViewModel(
 
         upcomingMovies.addSource(movieSource) {
             upcomingMovies.value = it
+            errorLayout.value = it.status == Resource.Status.ERROR
             if (it.status == Resource.Status.ERROR) _snackBarError.value =
                 Event("There is something error")
         }

@@ -21,9 +21,14 @@ class PopularViewModel(
     val populars: LiveData<Resource<List<MovieResult>>> get() = _popularMovies
     private var movieSource: LiveData<Resource<List<MovieResult>>> = MutableLiveData()
 
+    private val errorLayout = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean> get() = errorLayout
+
     init {
         loadPopularMovie()
     }
+
+    fun refreshLayout() = loadPopularMovie()
 
     private fun loadPopularMovie() = viewModelScope.launch(dispatchers.main) {
         showLoading(true)
@@ -33,6 +38,7 @@ class PopularViewModel(
         }
         _popularMovies.addSource(movieSource) {
             _popularMovies.value = it
+            errorLayout.value = it.status == Resource.Status.ERROR
             showLoading(false)
             if (it.status == Resource.Status.ERROR) {
                 _snackBarError.value = Event("There something wrong")

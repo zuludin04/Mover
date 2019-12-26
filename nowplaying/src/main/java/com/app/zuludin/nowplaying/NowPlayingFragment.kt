@@ -29,6 +29,7 @@ class NowPlayingFragment : Fragment() {
         dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_now_playing, container, false)
 
         dataBinding.viewModel = viewModel
+        dataBinding.errorLayout.viewModel = viewModel
         dataBinding.lifecycleOwner = viewLifecycleOwner
 
         return dataBinding.root
@@ -40,10 +41,9 @@ class NowPlayingFragment : Fragment() {
     }
 
     private fun showMovieInRecycler() {
-        val movieAdapter =
-            NowPlayingAdapter(ArrayList())
+        val movieAdapter = NowPlayingAdapter(ArrayList())
 
-        recycler_view.apply {
+        dataBinding.recyclerView.apply {
             recycler_view.setHasFixedSize(true)
             recycler_view.layoutManager = GridLayoutManager(requireContext(), 2)
             recycler_view.adapter = movieAdapter
