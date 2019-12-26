@@ -1,10 +1,10 @@
 dependencies {
-    // KOTLIN
+    // kotlin
     implementation Kotlin.kotlin_std
     implementation Kotlin.kotlinCoroutineCore
     implementation Kotlin.kotlinCoroutineAndroid
 
-    // ANDROID
+    // android libs
     implementation SupportLibs.appCompat
     implementation SupportLibs.coreKtx
     implementation SupportLibs.constraintLayout
@@ -13,4 +13,23 @@ dependencies {
     implementation SupportLibs.recyclerView
     implementation SupportLibs.navigation
     implementation SupportLibs.navigationFrag
+    implementation SupportLibs.material
+    implementation SupportLibs.viewPager2
+
+    // koin
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+    implementation Libraries.koinExt
+
+    // network
+    implementation Libraries.retrofit
+    implementation Libraries.retrofitCoroutineAdapter
+    implementation Libraries.retrofitGsonConverter
+    implementation Libraries.gson
+    implementation Libraries.httpLoggingInterceptor
+
+    // third libs
+    implementation Libraries.glide
+    implementation Libraries.shapeOfView
+    implementation Libraries.loaderPack
 }

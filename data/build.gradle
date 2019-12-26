@@ -6,32 +6,3 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 }
-
-dependencies {
-    // ANDROID
-    implementation SupportLibs.lifecycleExtensions
-
-    // KOTLIN
-    implementation Kotlin.kotlin_std
-    implementation Kotlin.kotlinCoroutineCore
-    implementation Kotlin.kotlinCoroutineAndroid
-
-    // NETWORK
-    implementation Libraries.retrofitCoroutineAdapter
-    implementation Libraries.gson
-    implementation Libraries.retrofit
-    implementation Libraries.retrofitGsonConverter
-    implementation Libraries.httpLoggingInterceptor
-
-    // KOIN
-    implementation Libraries.koin
-    implementation Libraries.koinViewModel
-
-    // TEST
-    testImplementation TestLibs.junit
-    testImplementation TestLibs.koin
-    testImplementation TestLibs.mockWebServer
-    testImplementation TestLibs.mockk
-    testImplementation TestLibs.archCoreTest
-    testImplementation TestLibs.coroutine
-}

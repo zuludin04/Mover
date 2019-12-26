@@ -22,14 +22,4 @@ dependencies {
     implementation project(':popular')
     implementation project(':upcoming')
     implementation project(':search')
-
-    // KOIN
-    implementation Libraries.koin
-    implementation Libraries.koinViewModel
-    implementation Libraries.koinExt
-
-    // ANDROID
-    implementation SupportLibs.appCompat
-    implementation SupportLibs.navigation
-    implementation SupportLibs.navigationFrag
 }

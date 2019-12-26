@@ -1,5 +1,6 @@
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: '../android_core_dependencies.gradle'
 
 android {
     compileSdkVersion Android.compileSdkVersion
@@ -16,8 +17,4 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-}
-
-dependencies {
-    implementation Kotlin.kotlin_std
 }

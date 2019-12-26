@@ -9,6 +9,8 @@ object Version {
     const val lifecycle = "2.1.0-alpha04"
     const val recyclerview = "1.0.0"
     const val nav = "2.0.0"
+    const val viewPager2 = "1.0.0"
+    const val material = "1.2.0-alpha02"
 
     // third libs
     const val koinVer = "2.0.1"
@@ -49,6 +51,8 @@ object SupportLibs {
     val recyclerView = "androidx.recyclerview:recyclerview:${Version.recyclerview}"
     val navigation = "androidx.navigation:navigation-ui-ktx:${Version.nav}"
     val navigationFrag = "androidx.navigation:navigation-fragment-ktx:${Version.nav}"
+    val viewPager2 = "androidx.viewpager2:viewpager2:${Version.viewPager2}"
+    val material = "com.google.android.material:material:${Version.material}"
 }
 
 object Libraries {

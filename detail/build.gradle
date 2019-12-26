@@ -1,8 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-kapt'
-apply from: '../android_features_dependencies.gradle'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: '../android_commons.gradle'
+apply from: '../test_dependencies.gradle'
 
 android {
     defaultConfig {
@@ -16,7 +17,6 @@ android {
 }
 
 dependencies {
-    implementation Libraries.glide
-    implementation Libraries.shapeOfView
     implementation project(':common')
+    implementation project(":data")
 }
