@@ -24,8 +24,8 @@ class NowPlayingAdapter(private val movies: MutableList<MovieResult>) : MovieAda
     override fun layoutResource(): Int =
         R.layout.item_now_playing
 
-    fun addMovies(list: List<MovieResult>?) {
-        list?.let { movies.addAll(it) }
+    fun addMovies(list: List<MovieResult>) {
+        movies.addAll(list)
         notifyDataSetChanged()
     }
 
@@ -40,7 +40,7 @@ class NowPlayingViewHolder(view: View): RecyclerView.ViewHolder(view) {
         itemView.movie_rating.text = "${movie.voteAverage}"
 
         itemView.setOnClickListener {
-            var intent: Intent? = null
+            val intent: Intent?
             try {
                 intent = Intent(
                     itemView.context,

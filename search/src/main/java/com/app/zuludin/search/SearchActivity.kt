@@ -38,21 +38,14 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setupSearchRecycler() {
-        val searchAdapter =
-            SearchResultAdapter(ArrayList())
+        val searchAdapter = SearchResultAdapter(ArrayList())
 
-        recycler_search.apply {
+        dataBinding.recyclerSearch.apply {
             layoutManager = LinearLayoutManager(this@SearchActivity)
             setHasFixedSize(true)
             addItemDecoration(EqualSpacingItemDecoration(16, EqualSpacingItemDecoration.VERTICAL))
             adapter = searchAdapter
         }
-
-        viewModel.result.observe(this, Observer {
-            it?.data?.let { results ->
-                searchAdapter.addMovies(results)
-            }
-        })
     }
 
     private fun populateSearchResult() {

@@ -23,8 +23,8 @@ class PopularAdapter(private val movies: MutableList<MovieResult>) :
     override fun layoutResource(): Int =
         R.layout.item_popular
 
-    fun addMovies(list: List<MovieResult>?) {
-        list?.let { movies.addAll(it) }
+    fun addMovies(list: List<MovieResult>) {
+        movies.addAll(list)
         notifyDataSetChanged()
     }
 }

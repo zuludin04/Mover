@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.zuludin.common.base.BaseFragment
 import com.app.zuludin.common.base.BaseViewModel
@@ -44,19 +43,12 @@ class PopularFragment : BaseFragment() {
     override fun getViewModel(): BaseViewModel = viewModel
 
     private fun showMovieInRecycler() {
-        val movieAdapter =
-            PopularAdapter(ArrayList())
+        val movieAdapter = PopularAdapter(ArrayList())
 
         dataBinding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
             adapter = movieAdapter
         }
-
-        viewModel.populars.observe(this, Observer {
-            it.data.let { movie ->
-                movieAdapter.addMovies(movie)
-            }
-        })
     }
 }

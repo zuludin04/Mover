@@ -21,8 +21,9 @@ class SearchResultAdapter(private val results: MutableList<MovieResult>) : Movie
     override fun layoutResource(): Int =
         R.layout.item_search_result
 
-    fun addMovies(list: List<MovieResult>?) {
-        list?.let { results.addAll(it) }
+    fun addMovies(list: List<MovieResult>) {
+        results.clear()
+        results.addAll(list)
         notifyDataSetChanged()
     }
 }

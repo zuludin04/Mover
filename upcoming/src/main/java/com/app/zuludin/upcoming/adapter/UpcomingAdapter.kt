@@ -9,7 +9,8 @@ import com.app.zuludin.upcoming.R
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_upcoming.view.*
 
-class UpcomingAdapter(private val movies: MutableList<MovieResult>) : MovieAdapter<UpcomingViewHolder>() {
+class UpcomingAdapter(private val movies: MutableList<MovieResult>) :
+    MovieAdapter<UpcomingViewHolder>() {
     override fun setupView(holder: RecyclerView.ViewHolder, movie: MovieResult) {
         if (holder is UpcomingViewHolder) {
             holder.bind(movie)
@@ -28,8 +29,8 @@ class UpcomingAdapter(private val movies: MutableList<MovieResult>) : MovieAdapt
         return movies
     }
 
-    fun addMovies(list: List<MovieResult>?) {
-        list?.let { movies.addAll(it) }
+    fun addMovies(list: List<MovieResult>) {
+        movies.addAll(list)
         notifyDataSetChanged()
     }
 }
@@ -43,7 +44,7 @@ class UpcomingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.movie_release.text = movie.releaseDate
 
         itemView.setOnClickListener {
-            var intent: Intent? = null
+            val intent: Intent?
             try {
                 intent = Intent(
                     itemView.context,

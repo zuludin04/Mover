@@ -1,12 +1,11 @@
 package com.app.zuludin.nowplaying
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.zuludin.common.base.BaseFragment
 import com.app.zuludin.common.base.BaseViewModel
@@ -28,7 +27,8 @@ class NowPlayingFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_now_playing, container, false)
+        dataBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_now_playing, container, false)
 
         dataBinding.viewModel = viewModel
         dataBinding.errorLayout.viewModel = viewModel
@@ -52,11 +52,5 @@ class NowPlayingFragment : BaseFragment() {
             recycler_view.layoutManager = GridLayoutManager(requireContext(), 2)
             recycler_view.adapter = movieAdapter
         }
-
-        viewModel.movies.observe(this, Observer {
-            it?.let { movie ->
-                movieAdapter.addMovies(movie.data)
-            }
-        })
     }
 }
