@@ -1,17 +1,14 @@
 package com.app.zuludin.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.app.zuludin.detail.adapter.DetailInfoAdapter
 import com.app.zuludin.detail.databinding.ActivityMovieDetailBinding
-import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
-import kotlinx.android.synthetic.main.activity_movie_detail.*
 import kotlinx.android.synthetic.main.content_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -40,22 +37,8 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun setupMoreInfo(viewModel: MovieDetailViewModel) {
-        viewModel.poster.observe(this, Observer {url ->
-            val circularProgressDrawable = CircularProgressDrawable(this)
-            circularProgressDrawable.strokeWidth = 5f
-            circularProgressDrawable.centerRadius = 30f
-            circularProgressDrawable.start()
-
-            if (url != null) {
-                Glide.with(this)
-                    .load("https://image.tmdb.org/t/p/w500$url")
-                    .placeholder(circularProgressDrawable)
-                    .into(detail_backdrop)
-            }
-        })
-
         viewModel.more.observe(this, Observer {
-            it?.let {more ->
+            it?.let { more ->
                 recycler_info.apply {
                     adapter = DetailInfoAdapter(more)
                     layoutManager = LinearLayoutManager(this@MovieDetailActivity)

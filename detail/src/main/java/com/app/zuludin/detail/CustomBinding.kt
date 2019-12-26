@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 
 object CustomBinding {
 
-    @BindingAdapter("imageFromUrl")
+    @BindingAdapter("app:imageFromUrl")
     @JvmStatic
     fun setImageFromUrl(image: ImageView, url: String?) {
         val circularProgressDrawable = CircularProgressDrawable(image.context)

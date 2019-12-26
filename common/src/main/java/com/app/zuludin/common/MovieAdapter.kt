@@ -1,7 +1,5 @@
 package com.app.zuludin.common
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.zuludin.data.model.MovieResult
@@ -9,8 +7,7 @@ import com.app.zuludin.data.model.MovieResult
 abstract class MovieAdapter<VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val view = LayoutInflater.from(parent.context).inflate(layoutResource(), parent, false)
-        return buildViewHolder(view)
+        return buildViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
@@ -25,8 +22,6 @@ abstract class MovieAdapter<VH : RecyclerView.ViewHolder> : RecyclerView.Adapter
 
     abstract fun movieItems(): List<MovieResult>
 
-    abstract fun buildViewHolder(view: View): VH
-
-    abstract fun layoutResource(): Int
+    abstract fun buildViewHolder(parent: ViewGroup): VH
 
 }

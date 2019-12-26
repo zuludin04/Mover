@@ -1,13 +1,14 @@
 package com.app.zuludin.popular.adapter
 
 import android.content.Intent
-import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.zuludin.common.MovieAdapter
 import com.app.zuludin.data.model.MovieResult
 import com.app.zuludin.popular.R
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_popular.view.*
+import com.app.zuludin.popular.databinding.ItemPopularBinding
 
 class PopularAdapter(private val movies: MutableList<MovieResult>) :
     MovieAdapter<PopularViewHolder>() {
@@ -17,11 +18,15 @@ class PopularAdapter(private val movies: MutableList<MovieResult>) :
 
     override fun movieItems(): List<MovieResult> = movies
 
-    override fun buildViewHolder(view: View): PopularViewHolder =
-        PopularViewHolder(view)
-
-    override fun layoutResource(): Int =
-        R.layout.item_popular
+    override fun buildViewHolder(parent: ViewGroup): PopularViewHolder {
+        val binding: ItemPopularBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_popular,
+            parent,
+            false
+        )
+        return PopularViewHolder(binding)
+    }
 
     fun addMovies(list: List<MovieResult>) {
         movies.addAll(list)
@@ -29,14 +34,10 @@ class PopularAdapter(private val movies: MutableList<MovieResult>) :
     }
 }
 
-class PopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class PopularViewHolder(private val binding: ItemPopularBinding) :
+    RecyclerView.ViewHolder(binding.root) {
     fun bind(movie: MovieResult) {
-        Glide.with(itemView.context)
-            .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
-            .into(itemView.movie_poster)
-        itemView.movie_title.text = movie.title
-        itemView.movie_rating.text = "${movie.voteAverage}"
-        itemView.movie_release.text = movie.releaseDate
+        binding.movie = movie
 
         itemView.setOnClickListener {
             val intent: Intent?

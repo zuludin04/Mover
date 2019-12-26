@@ -1,13 +1,14 @@
 package com.app.zuludin.upcoming.adapter
 
 import android.content.Intent
-import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.zuludin.common.MovieAdapter
 import com.app.zuludin.data.model.MovieResult
 import com.app.zuludin.upcoming.R
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_upcoming.view.*
+import com.app.zuludin.upcoming.databinding.ItemUpcomingBinding
 
 class UpcomingAdapter(private val movies: MutableList<MovieResult>) :
     MovieAdapter<UpcomingViewHolder>() {
@@ -17,12 +18,14 @@ class UpcomingAdapter(private val movies: MutableList<MovieResult>) :
         }
     }
 
-    override fun buildViewHolder(view: View): UpcomingViewHolder {
-        return UpcomingViewHolder(view)
-    }
-
-    override fun layoutResource(): Int {
-        return R.layout.item_upcoming
+    override fun buildViewHolder(parent: ViewGroup): UpcomingViewHolder {
+        val binding: ItemUpcomingBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_upcoming,
+            parent,
+            false
+        )
+        return UpcomingViewHolder(binding)
     }
 
     override fun movieItems(): List<MovieResult> {
@@ -35,13 +38,10 @@ class UpcomingAdapter(private val movies: MutableList<MovieResult>) :
     }
 }
 
-class UpcomingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class UpcomingViewHolder(private val binding: ItemUpcomingBinding) :
+    RecyclerView.ViewHolder(binding.root) {
     fun bind(movie: MovieResult) {
-        Glide.with(itemView.context)
-            .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
-            .into(itemView.movie_poster)
-        itemView.movie_title.text = movie.title
-        itemView.movie_release.text = movie.releaseDate
+        binding.movie = movie
 
         itemView.setOnClickListener {
             val intent: Intent?
