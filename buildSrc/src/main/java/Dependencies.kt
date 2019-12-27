@@ -18,6 +18,7 @@ object Version {
     const val retrofitVer = "2.6.2"
     const val retrofitGsonVer = "2.6.2"
     const val gsonVer = "2.8.5"
+    const val room = "2.2.3"
     const val okHttp = "3.12.1"
     const val glideVer = "4.9.0"
     const val shapeOfView = "1.4.4"
@@ -66,6 +67,10 @@ object Libraries {
     val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofitVer}"
     val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:${Version.retrofitGsonVer}"
     val httpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.okHttp}"
+
+    val roomCompiler = "androidx.room:room-compiler:${Version.room}"
+    val roomRunTime = "androidx.room:room-runtime:${Version.room}"
+    val roomKtx = "androidx.room:room-ktx:${Version.room}"
 
     val glide = "com.github.bumptech.glide:glide:${Version.glideVer}"
 
