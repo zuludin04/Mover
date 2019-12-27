@@ -1,4 +1,4 @@
-package com.app.zuludin.upcoming
+package com.app.zuludin.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -23,13 +23,13 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 @ExperimentalCoroutinesApi
 @SmallTest
-class UpcomingViewModelTest {
+class SearchMovieViewModelTest {
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var getUpcomingMovieUseCase: GetUpcomingMovieUseCase
-    private lateinit var viewModel: UpcomingViewModel
+    private lateinit var viewModel: SearchMovieViewModel
+    private lateinit var getSearchResultUseCase: GetSearchResultUseCase
     private val dispatchers = AppDispatchers(Dispatchers.Unconfined, Dispatchers.Unconfined)
 
     private val movieList = listOf(
@@ -39,21 +39,22 @@ class UpcomingViewModelTest {
     )
 
     @Before
-    fun setupUpcomingMovieTest() {
-        getUpcomingMovieUseCase = mockk()
+    fun setupSearchMovieViewModelTest() {
+        getSearchResultUseCase = mockk()
     }
 
     @Test
-    fun `Load upcoming movie when it is being called`() {
+    fun `search movie from TMDB api`() {
         val observer = mockk<Observer<Resource<List<MovieResult>>>>(relaxed = true)
         val result = Resource.success(movieList)
 
-        coEvery { getUpcomingMovieUseCase() } returns MutableLiveData<Resource<List<MovieResult>>>().apply {
+        coEvery { getSearchResultUseCase("batman") } returns MutableLiveData<Resource<List<MovieResult>>>().apply {
             value = result
         }
 
-        viewModel = UpcomingViewModel(getUpcomingMovieUseCase, dispatchers)
-        viewModel.movies.observeForever(observer)
+        viewModel = SearchMovieViewModel(getSearchResultUseCase, dispatchers)
+        viewModel.result.observeForever(observer)
+        viewModel.searchMovie("batman")
 
         verify {
             observer.onChanged(result)
@@ -63,18 +64,19 @@ class UpcomingViewModelTest {
     }
 
     @Test
-    fun `showing error message when loading data`() {
+    fun `error when searching movie`() {
         val observer = mockk<Observer<Resource<List<MovieResult>>>>(relaxed = true)
         val observerSnackBar = mockk<Observer<Event<String>>>(relaxed = true)
         val result = Resource.error(Exception("Error"), null)
 
-        coEvery { getUpcomingMovieUseCase() } returns MutableLiveData<Resource<List<MovieResult>>>().apply {
+        coEvery { getSearchResultUseCase(any()) } returns MutableLiveData<Resource<List<MovieResult>>>().apply {
             value = result
         }
 
-        viewModel = UpcomingViewModel(getUpcomingMovieUseCase, dispatchers)
-        viewModel.movies.observeForever(observer)
+        viewModel = SearchMovieViewModel(getSearchResultUseCase, dispatchers)
+        viewModel.result.observeForever(observer)
         viewModel.snackBarError.observeForever(observerSnackBar)
+        viewModel.searchMovie("btm")
 
         verify {
             observer.onChanged(result)

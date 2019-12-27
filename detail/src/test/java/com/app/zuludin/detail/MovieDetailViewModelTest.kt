@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.test.filters.SmallTest
+import com.app.zuludin.common.Event
 import com.app.zuludin.data.AppDispatchers
 import com.app.zuludin.data.model.MovieDetailResponse
 import com.app.zuludin.data.utils.Resource
@@ -55,6 +56,28 @@ class MovieDetailViewModelTest {
 
         verify {
             observer.onChanged(result.data)
+        }
+
+        confirmVerified(observer)
+    }
+
+    @Test
+    fun `load detail movie but showing error message`() {
+        val observer = mockk<Observer<MovieDetailResponse>>(relaxed = true)
+        val observerSnackBar = mockk<Observer<Event<String>>>(relaxed = true)
+        val result = Resource.error(Exception("Error"), null)
+
+        coEvery { getMovieDetailUseCase(any()) } returns MutableLiveData<Resource<MovieDetailResponse>>().apply {
+            value = result
+        }
+
+        viewModel.detail.observeForever(observer)
+        viewModel.snackBarError.observeForever(observerSnackBar)
+        viewModel.loadDetailData(1)
+
+        verify {
+            observer.onChanged(result.data)
+            observerSnackBar.onChanged(viewModel.snackBarError.value)
         }
 
         confirmVerified(observer)

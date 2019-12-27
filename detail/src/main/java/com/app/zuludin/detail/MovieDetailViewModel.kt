@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.app.zuludin.common.Event
 import com.app.zuludin.common.base.BaseViewModel
 import com.app.zuludin.data.AppDispatchers
 import com.app.zuludin.data.model.*
@@ -49,7 +50,7 @@ class MovieDetailViewModel(
         movieDetailData.addSource(detailSource) {
             movieDetailData.value = it.data
 
-            it.data?.let {detail ->
+            it.data?.let { detail ->
                 detailDurationRelease.value =
                     "${detail.runtime} min - ${detail.releaseDate}"
                 movieGenres.value = detail.genres?.let { genre -> movieGenre(genre) }
@@ -62,6 +63,9 @@ class MovieDetailViewModel(
                 )
                 moviePoster.value = it.data?.posterPath
             }
+
+            if (it.status == Resource.Status.ERROR) _snackBarError.value =
+                Event(it.error?.message.toString())
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.test.filters.SmallTest
+import com.app.zuludin.common.Event
 import com.app.zuludin.data.AppDispatchers
 import com.app.zuludin.data.model.MovieResult
 import com.app.zuludin.data.utils.Resource
@@ -56,6 +57,28 @@ class PopularViewModelTest {
 
         verify {
             observer.onChanged(result)
+        }
+
+        confirmVerified(observer)
+    }
+
+    @Test
+    fun `showing error result when retrieving data`() {
+        val observer = mockk<Observer<Resource<List<MovieResult>>>>(relaxed = true)
+        val observerSnackBar = mockk<Observer<Event<String>>>(relaxed = true)
+        val result = Resource.error(Exception("Error"), null)
+
+        coEvery { getPopularMovieUseCase() } returns MutableLiveData<Resource<List<MovieResult>>>().apply {
+            value = result
+        }
+
+        viewModel = PopularViewModel(getPopularMovieUseCase, appDispatcher)
+        viewModel.populars.observeForever(observer)
+        viewModel.snackBarError.observeForever(observerSnackBar)
+
+        verify {
+            observer.onChanged(result)
+            observerSnackBar.onChanged(viewModel.snackBarError.value)
         }
 
         confirmVerified(observer)
