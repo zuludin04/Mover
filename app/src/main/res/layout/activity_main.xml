@@ -39,6 +39,7 @@
         style="@style/BottomNavigationStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:backgroundTint="@android:color/white"
         app:menu="@menu/bottom_navigation_menu" />
 
 </LinearLayout>

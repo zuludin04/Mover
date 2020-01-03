@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">common</string>
+    <string name="app_name">Mover</string>
     <string name="sorry">We\'re Sorry</string>
     <string name="something_wrong">There is something wrong. \n Check your connection and refresh the page</string>
     <string name="try_again">Try Again</string>

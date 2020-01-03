@@ -15,6 +15,13 @@
         <item name="windowActionBar">false</item>
     </style>
 
+    <style name="AppTheme.DetailStyle">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+    </style>
+
     <style name="BottomNavigationStyle">
         <item name="itemIconTint">@color/bottom_nav_color</item>
         <item name="itemTextColor">@color/bottom_nav_color</item>
