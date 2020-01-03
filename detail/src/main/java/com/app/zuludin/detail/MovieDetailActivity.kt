@@ -1,5 +1,7 @@
 package com.app.zuludin.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -32,6 +34,7 @@ class MovieDetailActivity : AppCompatActivity() {
         viewModel.loadDetailData(movieId)
 
         setupMoreInfo(viewModel)
+        openYoutube(viewModel)
 
         dataBinding.backButton.setOnClickListener { finish() }
     }
@@ -42,6 +45,18 @@ class MovieDetailActivity : AppCompatActivity() {
                 recycler_info.apply {
                     adapter = DetailInfoAdapter(more)
                     layoutManager = LinearLayoutManager(this@MovieDetailActivity)
+                }
+            }
+        })
+    }
+
+    private fun openYoutube(viewModel: MovieDetailViewModel) {
+        viewModel.detail.observe(this, Observer {
+            it?.videos?.results?.get(0)?.let { video ->
+                dataBinding.detailVideo.setOnClickListener {
+                    val uri = Uri.parse("https://www.youtube.com/watch?v=${video.key}")
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    startActivity(intent)
                 }
             }
         })

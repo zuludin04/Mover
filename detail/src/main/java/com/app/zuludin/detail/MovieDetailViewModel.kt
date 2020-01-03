@@ -37,9 +37,6 @@ class MovieDetailViewModel(
     private val moreInfo = MutableLiveData<List<Any>>()
     val more: LiveData<List<Any>> = moreInfo
 
-    private val moviePoster = MutableLiveData<String>()
-    val poster: LiveData<String> = moviePoster
-
     fun loadDetailData(movieId: Int) = viewModelScope.launch(dispatchers.main) {
         movieDetailData.removeSource(detailSource)
 
@@ -61,7 +58,6 @@ class MovieDetailViewModel(
                     detail.credits?.cast,
                     detail.similar?.results
                 )
-                moviePoster.value = it.data?.posterPath
             }
 
             if (it.status == Resource.Status.ERROR) _snackBarError.value =
