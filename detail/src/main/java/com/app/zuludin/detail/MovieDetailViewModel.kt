@@ -22,9 +22,6 @@ class MovieDetailViewModel(
     private val movieDetailData = MediatorLiveData<MovieDetailResponse>()
     val detail: LiveData<MovieDetailResponse> get() = movieDetailData
 
-    private val detailDurationRelease = MutableLiveData<String>()
-    val durationRelease: LiveData<String> = detailDurationRelease
-
     private val movieGenres = MutableLiveData<String>()
     val genres: LiveData<String> = movieGenres
 
@@ -48,8 +45,6 @@ class MovieDetailViewModel(
             movieDetailData.value = it.data
 
             it.data?.let { detail ->
-                detailDurationRelease.value =
-                    "${detail.runtime} min - ${detail.releaseDate}"
                 movieGenres.value = detail.genres?.let { genre -> movieGenre(genre) }
                 movieCountry.value = detail.productionCountries?.get(0)?.name
                 movieDirector.value = detail.credits?.crew?.let { dir -> movieDirector(dir) }

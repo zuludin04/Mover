@@ -83,6 +83,7 @@ class CastViewHolder(view: View): RecyclerView.ViewHolder(view) {
             .load("https://image.tmdb.org/t/p/w500${cast.profilePath}")
             .into(itemView.cast_image)
         itemView.cast_name.text = cast.name
+        itemView.cast_role.text = cast.character
     }
 }
 

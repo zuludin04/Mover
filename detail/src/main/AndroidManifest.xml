@@ -5,7 +5,7 @@
     <application>
         <activity
             android:name=".MovieDetailActivity"
-            android:theme="@style/AppTheme.DetailStyle" />
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

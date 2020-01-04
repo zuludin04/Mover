@@ -18,9 +18,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="13sp"
+        android:textColor="@color/colorSecondaryDark"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/cast_image"
         app:layout_constraintStart_toStartOf="@+id/cast_image"
         app:layout_constraintTop_toBottomOf="@+id/cast_image" />
+
+    <TextView
+        android:id="@+id/cast_role"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/cast_image"
+        app:layout_constraintStart_toStartOf="@+id/cast_image"
+        app:layout_constraintTop_toBottomOf="@+id/cast_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

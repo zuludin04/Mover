@@ -44,6 +44,8 @@ class MovieDetailActivity : AppCompatActivity() {
             it?.let { more ->
                 recycler_info.apply {
                     adapter = DetailInfoAdapter(more)
+                    setHasFixedSize(true)
+                    isNestedScrollingEnabled = false
                     layoutManager = LinearLayoutManager(this@MovieDetailActivity)
                 }
             }
