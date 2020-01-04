@@ -50,11 +50,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@{movie.releaseDate}"
             android:textColor="@android:color/white"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="@+id/movie_poster"
             app:layout_constraintStart_toStartOf="parent"
+            app:parseMovieDate="@{movie.releaseDate}"
             tools:text="26 Oct 2019" />
 
         <TextView

@@ -51,10 +51,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
-                android:text="@{movie.releaseDate}"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/search_image"
                 app:layout_constraintTop_toBottomOf="@+id/search_title"
+                app:parseMovieDate="@{movie.releaseDate}"
                 tools:text="Dessert" />
 
             <TextView

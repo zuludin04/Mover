@@ -1,5 +1,6 @@
 package com.app.zuludin.search.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -38,5 +39,19 @@ class SearchViewHolder(private val binding: ItemSearchResultBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(result: MovieResult) {
         binding.movie = result
+
+        itemView.setOnClickListener {
+            val intent: Intent?
+            try {
+                intent = Intent(
+                    itemView.context,
+                    Class.forName("com.app.zuludin.detail.MovieDetailActivity")
+                )
+                intent.putExtra("MOVIE_ID", result.id)
+                itemView.context.startActivity(intent)
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            }
+        }
     }
 }
