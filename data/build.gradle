@@ -4,6 +4,7 @@ apply from: '../android_commons.gradle'
 
 android {
     defaultConfig {
+        buildConfigField("String" , "TMDB_API_KEY" , '"325705eafaaf6af0062a23113f72a058"')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 }

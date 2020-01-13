@@ -8,14 +8,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("movie/now_playing")
-    fun fetchMovieNowPlayingAsync(@Query("api_key") key: String): Deferred<MovieResponse>
-
-    @GET("movie/upcoming")
-    fun fetchUpcomingMovieAsync(@Query("api_key") key: String): Deferred<MovieResponse>
-
-    @GET("movie/popular")
-    fun fetchPopularMovieAsync(@Query("api_key") key: String): Deferred<MovieResponse>
+    @GET("movie/{type}")
+    fun fetchMovieListAsync(
+        @Path("type") path: String,
+        @Query("api_key") key: String
+    ): Deferred<MovieResponse>
 
     @GET("movie/{id}")
     fun fetchMovieDetailAsync(
